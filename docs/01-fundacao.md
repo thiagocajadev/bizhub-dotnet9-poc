@@ -117,26 +117,21 @@ dotnet add src/tests/BizHub.UI.Tests reference src/frontend/BizHub.UI
 dotnet add src/tests/BizHub.UI.Tests reference src/frontend/BizHub.ViewModels
 ```
 
-Analisando a organização em diretórios, ficou assim:
+Analisando a organização em diretórios (tree view), ocultando arquivos não essenciais, temos:
 
 ```tree
-BizHub
-├─ .git
-├─ .idea
-├─ docs
-├─ src
-│   ├─ backend
-│   │   ├─ BizHub.API           # API First + Controllers
-│   │   ├─ BizHub.Infra         # Repositórios, serviços, factory de DI
-│   │   └─ BizHub.Models        # Entidades e interfaces de domínio
-│   └─ frontend
-│       ├─ BizHub.UI            # Razor Pages / Blazor
-│       └─ BizHub.ViewModels    # DTOs/ViewModels da UI
-├─ tests
-│   ├─ BizHub.API.Tests         # Testes unitários e integração da API
-│   └─ BizHub.UI.Tests          # Testes da UI
-├─ BizHub.sln                    # Solution única
-├─ .editorconfig
-├─ .gitignore
-└─ README.md
+📁BizHub
+📄BizHub.sln                       # Solution
+├── 📁docs
+└── 📂src
+    ├── 📂backend
+    │   ├── 🌐BizHub.API           # API First + Controllers
+    │   ├── 🧩BizHub.Infra         # Repositórios, serviços, factory de DI
+    │   └── 🧩BizHub.Models        # Entidades e interfaces de domínio
+    ├── 📂frontend
+    │   ├── 🌐BizHub.UI            # Razor Pages / Blazor
+    │   └── 🧩BizHub.ViewModels    # DTOs/ViewModels da UI
+    └── 📂tests
+        ├── 🧪BizHub.API.Tests     # Testes unitários e integração da API
+        └── 🧪BizHub.UI.Tests      # Testes da UI
 ```
