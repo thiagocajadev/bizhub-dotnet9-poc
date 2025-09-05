@@ -70,7 +70,7 @@ dotnet new xunit -n BizHub.UI.Tests
 
 Beleza! A estrutura inicial foi criada, agora é a hora de organizar a estrutura lógica com uma **Solution**.
 
-# Criando Solutions
+## Criando Solutions
 
 No Csharp, criamos `solutions` que são arquivos do tipo `sln`. Elas servem para **abraçar** os **projetos que compõe
 o projeto principal**, facilitando as referências e uso com seu editor (IDE).
@@ -135,3 +135,61 @@ Analisando a organização em diretórios (tree view), ocultando arquivos não e
         ├── 🧪BizHub.API.Tests     # Testes unitários e integração da API
         └── 🧪BizHub.UI.Tests      # Testes da UI
 ```
+
+## Scripts de inicialização.
+
+A IDE `Rider` possui uma opção chamada **Compound**, onde é possivel agregar os executaveis dos projetos para
+inicializarem.
+
+Vou configurar aqui um script para o executar independente da IDE. O ambiente de Dev precisa de agilidade.
+
+```bash
+#!/bin/bash
+
+# Define variáveis com o caminho dos executáveis.
+BACKEND_PATH="src/backend/BizHub.API"
+FRONTEND_PATH="src/frontend/BizHub.UI"
+
+# Função que verifica e encerra processos abertos.
+stop_process_if_running() {
+    local process_name=$1
+    if pgrep -f "$process_name" > /dev/null; then
+        echo "⏳ Parando $process_name..."
+        pkill -SIGINT -f "$process_name"
+        pkill -SIGTERM -f "$process_name"
+        echo "🔴  $process_name parado."
+        echo
+    else
+        echo "🟡  $process_name não está em execução."
+        echo
+    fi
+}
+
+# Função principal com o fluxo de execução.
+main() {
+    echo "⏳ Verificando processos em execução..."
+    stop_process_if_running "dotnet run --project $BACKEND_PATH"
+    stop_process_if_running "dotnet run --project $FRONTEND_PATH"
+
+    echo "🟢  Iniciando backend..."
+    dotnet run --project "$BACKEND_PATH" &
+
+    echo "🟢  Iniciando frontend..."
+    dotnet run --project "$FRONTEND_PATH" &
+    echo
+
+    wait
+}
+
+# Chama a função principal
+main
+```
+
+Agora é só executar na raiz do projeto:
+
+```bash
+./dotnet-run-dev.sh
+```
+> [!NOTE]
+> Um atalho útil no **bash** é usar `ctrl + r`, digitar `dev` e depois a seta para direita.
+> Ai é só confiar no auto-completar para esse e demais comandos.

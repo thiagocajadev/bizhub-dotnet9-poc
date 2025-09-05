@@ -27,7 +27,7 @@ sudo apt-get update && sudo apt-get install -y dotnet-sdk-9.0
 ## Convenções
 
 Em projetos mais recentes, aplico convenções e padrões que melhoram a leitura e escrita do código. Aqui podem entrar
-alguns arquivos auxiliares configurações para o assegurar o processo de `linting`:
+alguns arquivos auxiliares de configurações, assegurando o processo de `linting`:
 
 - `.gitignore` → Ignora pastas e arquivos que não fazem parte do projeto.
 - `.editorconfig` → Define padrão de estilos, como espaçamento e indentação.
